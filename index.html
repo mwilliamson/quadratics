@@ -77,19 +77,21 @@
           <table class="steps">
             <tr>
               <th>Original equation</th>
-              <td>$$ 3x + 12 = x - 9 $$</td>
+              <td><span data-display="original"></span> <span class="action" data-action="randomise">(randomise)</span></td>
             </tr>
             <tr>
               <th>Rearrange the equation so that one side of the equation is $$ 0 $$</th>
-              <td>$$ 0 = 2x + 21 $$</td>
+              <td><span data-display="rearranged"></span></td>
             </tr>
             <tr>
               <th>Replace the $$ 0 $$ with $$ y $$</th>
-              <td>$$ y = 2x + 21 $$</td>
+              <td><span data-display="rearranged-y"></span></td>
             </tr>
           </table>
-        </div>
         
+          <div class="graph">
+          </div>
+        </div>
       </div>
     </div>
     
@@ -103,6 +105,8 @@
     </script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
+    <script src="http://d3js.org/d3.v3.js"></script>
+    <script src="main.js"></script>
     
   </body>
 </html>

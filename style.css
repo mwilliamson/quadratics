@@ -22,3 +22,23 @@ table.steps th, table.steps td {
     padding: 10px;
     text-align: left;
 }
+
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.action {
+    color: #003399;
+    cursor: pointer;
+    text-decoration: underline;
+}
