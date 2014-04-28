@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"> 
+    <title>Quadratic equations</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Merriweather" type="text/css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="main">
+        <h1>Quadratic equations</h1>
+        
+        <h2>Introduction</h2>
+        
+        <p>
+          Linear equations are made up of two different types of terms:
+        </p>
+        
+        <ul>
+          <li>
+            Variables, such as $$ x $$.
+            They might be multiplied by a number e.g. $$ -2x $$, $$ \frac{3}{4} x $$.
+          </li>
+          <li>
+            Constants, such as $$ 6 $$, $$ -19 $$, or $$ \frac{1}{2} $$.
+            In other words, a single number.
+          </li>
+        </ul>
+        
+        <p>
+          By putting these pieces together, we can make linear equations:
+        </p>
+        
+        $$$
+          \begin{equation*}
+          \begin{split}
+            2x + 4 & = 0 \\
+            3x - 9 & = 16 \\
+            6x - 4 & = x + 2 \\
+            -4x & = 5 \\
+          \end{split}
+          \end{equation*}
+        $$$
+        
+        <p>
+          Quadratic equations are made up of the same terms as linear equations,
+          plus one more: a variable squared, such as $$x^2$$.
+          Using this extra piece, we can make quadratic equations:
+        </p>
+        
+        $$$
+          \begin{equation*}
+          \begin{split}
+            x^2 + 3x + 2 & = 0 \\
+            x^2 - 4x & = 12 \\
+            4x^2 & = 0 \\
+            -3x^2 + 27 & = 54 \\
+          \end{split}
+          \end{equation*}
+        $$$
+        
+        <h2>Visualising quadratic equations</h2>
+        
+        <p>
+          When we have a linear equation, we can visualise it by plotting in a graph.
+          We do this by the following steps:
+        </p>
+        
+        <ol>
+          <li>Rearrange the equation so that one side of the equation is $$ 0 $$</li>
+          <li>Replace the $$ 0 $$ with $$ y $$</li>
+          <li>Plot the equation</li>
+        </ol>
+        
+        <div class="interactive" data-interact-name="visualising-linear-equations">
+          <table class="steps">
+            <tr>
+              <th>Original equation</th>
+              <td>$$ 3x + 12 = x - 9 $$</td>
+            </tr>
+            <tr>
+              <th>Rearrange the equation so that one side of the equation is $$ 0 $$</th>
+              <td>$$ 0 = 2x + 21 $$</td>
+            </tr>
+            <tr>
+              <th>Replace the $$ 0 $$ with $$ y $$</th>
+              <td>$$ y = 2x + 21 $$</td>
+            </tr>
+          </table>
+        </div>
+        
+      </div>
+    </div>
+    
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$$','$$']],
+        displayMath: [['$$$','$$$']]
+      }
+    });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+  </body>
+</html>
