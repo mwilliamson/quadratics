@@ -76,8 +76,8 @@
         removeNode(containerElement.querySelector("svg"));
         
         var margin = {top: 20, right: 20, bottom: 30, left: 50},
-            width = 600 - margin.left - margin.right,
-            height = 300 - margin.top - margin.bottom;
+            width = 400 - margin.left - margin.right,
+            height = 400 - margin.top - margin.bottom;
 
         var parseDate = d3.time.format("%d-%b-%y").parse;
 
