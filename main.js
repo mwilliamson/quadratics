@@ -6,10 +6,7 @@
     }
     
     function loadInteractiveElement(interactiveElement) {
-        var initialEquation = {
-            left: {a: 3, b: 2},
-            right: {a: 1, b: -4}
-        };
+        var initialEquation = {a: 2, b: 4};
         
         useEquation(interactiveElement, initialEquation);
         
@@ -19,73 +16,36 @@
     }
     
     function randomEquation() {
-        var equation = {
-            left: {a: getRandomInt(0, 10), b: getRandomInt(0, 10)},
-            right: {a: getRandomInt(0, 10), b: getRandomInt(0, 10)}
-        };
-        if (equation.left.a === equation.right.a) {
-            equation.right.a -= 1;
-        }
-        return equation;
+        return {a: getRandomInt(-10, 10), b: getRandomInt(-10, 10)};
     }
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
     
     function useEquation(interactiveElement, equation) {
-        displayEquation(interactiveElement.querySelector("*[data-display='original']"), equation);
-        var rearranged = rearrange(equation);
-        displayEquation(interactiveElement.querySelector("*[data-display='rearranged']"), rearranged);
-        var rearrangedY = {
-            left: "y",
-            right: rearranged.left
-        };
-        displayEquation(interactiveElement.querySelector("*[data-display='rearranged-y']"), rearrangedY);
+        displayEquation(interactiveElement.querySelector("*[data-display='equation']"), equation);
         MathJax.Hub.Queue(["Typeset", MathJax.Hub, interactiveElement]);
         
         var graphElement = interactiveElement.querySelector(".graph");
         
         plotEquation(graphElement, function(x) {
-            return rearranged.left.a * x + rearranged.left.b;
+            return equation.a * x + equation.b;
         });
-    }
-    
-    function rearrange(equation) {
-        return {
-            left: {
-                a: equation.left.a - equation.right.a,
-                b: equation.left.b - equation.right.b
-            },
-            right: {
-                a: 0,
-                b: 0
-            }
-        };
     }
     
     function displayEquation(element, equation) {
         // TODO: escape
-        element.innerHTML = "$$ " + equationToLatex(equation) + " $$";
-    }
-    
-    function equationToLatex(equation) {
-        var leftDisplay = termsToLatex(equation.left);
-        var rightDisplay = termsToLatex(equation.right);
-        return leftDisplay + " = " + rightDisplay;
+        element.innerHTML = "$$ y = " + termsToLatex(equation) + " $$";
     }
     
     function termsToLatex(terms) {
-        if (terms === "y") {
-            return "y";
+        var a = termToLatex({value: terms.a, suffix: "x", isFirst: true});
+        var b = termToLatex({value: terms.b});
+        
+        if (!a && !b) {
+            return "0";
         } else {
-            var a = termToLatex({value: terms.a, suffix: "x", isFirst: true});
-            var b = termToLatex({value: terms.b});
-            
-            if (!a && !b) {
-                return "0";
-            } else {
-                return [a, b].join(" ");
-            }
+            return [a, b].join(" ");
         }
     }
     

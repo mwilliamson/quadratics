@@ -11,6 +11,10 @@
       <div class="main">
         <h1>Quadratic equations</h1>
         
+        <p>
+          (This is meant as a demo, the quality of the actual text is probably not that good at the moment)
+        </p>
+        
         <h2>Introduction</h2>
         
         <p>
@@ -63,36 +67,44 @@
         <h2>Visualising quadratic equations</h2>
         
         <p>
-          When we have a linear equation, we can visualise it by plotting in a graph.
-          We do this by the following steps:
+          We can visualise linear equations by plotting one side of the equation on a graph.
+          For instance, if we have $$ 2x + 4 = 5 - 3x $$, we can visualise the
+          left-hand side by plotting $$ y = 2x + 4 $$.
         </p>
         
-        <ol>
-          <li>Rearrange the equation so that one side of the equation is $$ 0 $$</li>
-          <li>Replace the $$ 0 $$ with $$ y $$</li>
-          <li>Plot the equation</li>
-        </ol>
-        
-        <div class="interactive" data-interact-name="visualising-linear-equations">
-          <table class="steps">
-            <tr>
-              <th>Original equation</th>
-              <td><span data-display="original"></span> <span class="action" data-action="randomise">(randomise)</span></td>
-            </tr>
-            <tr>
-              <th>Rearrange the equation so that one side of the equation is $$ 0 $$</th>
-              <td><span data-display="rearranged"></span></td>
-            </tr>
-            <tr>
-              <th>Replace the $$ 0 $$ with $$ y $$</th>
-              <td><span data-display="rearranged-y"></span></td>
-            </tr>
-          </table>
+        <div class="interactive" data-interact-name="single-linear-equation">
+          <p><span class="action">(randomise)</span></p>
+          <p><span data-display="equation"></span></p>
         
           <div class="graph">
           </div>
         </div>
-      </div>
+        
+        <p>
+          If we plot both sides of a linear equation, then the solution for $$ x $$
+          is the $$ x $$ coordinate where the lines meet. For instance,
+          if we have the equation $$ 2x + 4 = 5 - 3x $$, we can plot
+          $$ y = 2x + 4 $$ and $$ y = 5 - 3x $$.
+        </p>
+        
+        <p>TODO: plotting two lines</p>
+        
+        <p>
+          To makes things simpler, we normally rearrange linear equations so that one side is zero.
+          For instance, if we have the equation $$ 2x + 4 = 5 - 3x $$, we can
+          rearrange it to $$ 5x - 1 = 0 $$. As before, we can plot both sides
+          of the equation, with the solution being the x coordinate where
+          the lines meet. Since one side of the equation is zero, one of the lines
+          we plot is $$ y = 0 $$, which is the same as the x-axis. Therefore,
+          our solution is the $$ x $$ coordinate where $$ y = 5x - 1 $$ meets the x-axis.
+        </p>
+        
+        <p>
+          In general, if we rearrange an equation so that one of the sides is zero,
+          the solution is the $$ x $$ coordinate where the left-hand side meets the x-axis.
+        </p>
+        
+        
     </div>
     
     <script type="text/x-mathjax-config">
