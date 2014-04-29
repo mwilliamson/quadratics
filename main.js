@@ -29,11 +29,81 @@
         var name = interactiveElement.getAttribute("data-interact-name");
         var graph = graphs[name];
         
-        useEquation(interactiveElement, graph.initialEquation);
+        var currentEquation;
+        
+        updateEquation(graph.initialEquation);
+        
+        loadControls(interactiveElement, graph, {
+            value: function() {
+                return currentEquation;
+            },
+            update: updateEquation
+        });
+        
+        function updateEquation(equation) {
+            currentEquation = equation;
+            useEquation(interactiveElement, equation);
+        }
         
         interactiveElement.querySelector(".action").addEventListener("click", function() {
-            useEquation(interactiveElement, randomEquation(graph.highestPower));
+            updateEquation(randomEquation(graph.highestPower));
         }, true);
+    }
+    
+    function loadControls(interactiveElement, graph, currentEquation) {
+        var controlsElement = interactiveElement.querySelector(".controls");
+        var coefficientIndex = 0;
+        for (var power = graph.highestPower; power >= 0; power--) {
+            var coefficientControl = createCoefficientControl(coefficientIndex, power, currentEquation);
+            controlsElement.appendChild(coefficientControl);
+            
+            coefficientIndex++;
+        }
+    }
+    
+    function createCoefficientControl(coefficientIndex, power, currentEquation) {
+        var li = $(document.createElement("li"));
+        
+        var less = $(document.createElement("span"));
+        less.addClass("action");
+        less.addClass("button-less");
+        less.text("-");
+        li.append(less);
+        
+        less.on("click", function() {
+            var equation = {coefficients: currentEquation.value().coefficients.slice(0)};
+            var selectionIndex = coefficientSelection.indexOf(equation.coefficients[power]);
+            if (selectionIndex <= 0) {
+                equation.coefficients[power]--;
+            } else {
+                equation.coefficients[power] = coefficientSelection[selectionIndex - 1];
+            }
+            currentEquation.update(equation);
+        });
+        
+        var name = $(document.createElement("span"));
+        name.addClass("control-name");
+        name.text(String.fromCharCode("a".charCodeAt(0) + coefficientIndex));
+        li.append(name);
+        
+        var more = $(document.createElement("span"));
+        more.addClass("action");
+        more.addClass("button-more");
+        more.text("+");
+        li.append(more);
+        
+        more.on("click", function() {
+            var equation = {coefficients: currentEquation.value().coefficients.slice(0)};
+            var selectionIndex = coefficientSelection.indexOf(equation.coefficients[power]);
+            if (selectionIndex === -1 || selectionIndex >= coefficientSelection.length - 1) {
+                equation.coefficients[power]++;
+            } else {
+                equation.coefficients[power] = coefficientSelection[selectionIndex + 1];
+            }
+            currentEquation.update(equation);
+        });
+        
+        return li.get(0);
     }
     
     function randomEquation(highestPower) {
@@ -198,3 +268,4 @@
         }
     }
 })();
+

@@ -53,3 +53,26 @@ table.steps th, table.steps td {
 .graph svg {
     background-color: #fff;
 }
+
+
+.button-less, .button-more {
+    margin: 0 5px;
+    padding: 2px 5px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+.button-less {
+    background-color: #a00;
+}
+
+.button-more {
+    background-color: #090;
+}
+
+.control-name {
+    display: inline-block;
+    width: 15px;
+    text-align: center;
+}
