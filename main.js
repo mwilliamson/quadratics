@@ -83,7 +83,7 @@
         
         var name = $(document.createElement("span"));
         name.addClass("control-name");
-        name.text(String.fromCharCode("a".charCodeAt(0) + coefficientIndex));
+        name.text("$$ " + String.fromCharCode("a".charCodeAt(0) + coefficientIndex) + " $$");
         li.append(name);
         
         var more = $(document.createElement("span"));
