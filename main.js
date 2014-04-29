@@ -1,25 +1,49 @@
 (function() {
+    var graphs = {
+        "single-linear-equation": {
+            highestPower: 1,
+            initialEquation: {coefficients: [4, 2]}
+        },
+        "single-quadratic-equation": {
+            highestPower: 2,
+            initialEquation: {coefficients: [-10, 3, 1]}
+        }
+    };
+    
+    var coefficientSelection = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    
     var interactiveElements = document.getElementsByClassName("interactive");
     for (var i = 0; i < interactiveElements.length; i++) {
         var interactiveElement = interactiveElements[i];
         loadInteractiveElement(interactiveElement);
     }
     
+    
     function loadInteractiveElement(interactiveElement) {
-        var initialEquation = {a: 2, b: 4};
+        var name = interactiveElement.getAttribute("data-interact-name");
+        var graph = graphs[name];
         
-        useEquation(interactiveElement, initialEquation);
+        useEquation(interactiveElement, graph.initialEquation);
         
         interactiveElement.querySelector(".action").addEventListener("click", function() {
-            useEquation(interactiveElement, randomEquation());
+            useEquation(interactiveElement, randomEquation(graph.highestPower));
         }, true);
     }
     
-    function randomEquation() {
-        return {a: getRandomInt(-10, 10), b: getRandomInt(-10, 10)};
+    function randomEquation(highestPower) {
+        var coefficients = [];
+        for (var power = 0; power <= highestPower; power++) {
+            coefficients.push(randomElement(coefficientSelection));
+        }
+        return {coefficients: coefficients};
+        
     }
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    
+    function randomElement(elements) {
+        return elements[getRandomInt(0, elements.length - 1)];
     }
     
     function useEquation(interactiveElement, equation) {
@@ -29,7 +53,12 @@
         var graphElement = interactiveElement.querySelector(".graph");
         
         plotEquation(graphElement, function(x) {
-            return equation.a * x + equation.b;
+            var coefficients = equation.coefficients;
+            var total = 0;
+            for (var power = 0; power < coefficients.length; power++) {
+                total += coefficients[power] * Math.pow(x, power);
+            }
+            return total;
         });
     }
     
@@ -38,14 +67,33 @@
         element.innerHTML = "$$ y = " + termsToLatex(equation) + " $$";
     }
     
-    function termsToLatex(terms) {
-        var a = termToLatex({value: terms.a, suffix: "x", isFirst: true});
-        var b = termToLatex({value: terms.b});
+    function termsToLatex(equation) {
+        var coefficients = equation.coefficients;
         
-        if (!a && !b) {
-            return "0";
+        var terms = [];
+        var suffix;
+        for (var power = coefficients.length; power --> 0; ) {
+            var coefficient = coefficients[power];
+            if (coefficient) {
+                if (power === 0) {
+                    suffix = "";
+                } else if (power === 1) {
+                    suffix = "x";
+                } else {
+                    suffix = "x^" + power;
+                }
+                terms.push(termToLatex({
+                    value: coefficient,
+                    suffix: suffix,
+                    isFirst: terms.length === 0
+                }));
+            }
+        }
+        
+        if (terms.length > 0) {
+            return terms.join(" ");
         } else {
-            return [a, b].join(" ");
+            return 0;
         }
     }
     
