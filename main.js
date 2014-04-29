@@ -10,7 +10,13 @@
         }
     };
     
-    var coefficientSelection = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    var coefficientSelection = [
+        -10, -9, -8, -7, -6, -5, -4, -3, -2, -1,
+        -0.9, -0.8, -0.7, -0.6, -0.5, -0.4, -0.3, -0.2, -0.1,
+        0,
+        0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9,
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+    ];
     
     var interactiveElements = document.getElementsByClassName("interactive");
     for (var i = 0; i < interactiveElements.length; i++) {
@@ -123,7 +129,7 @@
     function plotLineGraph(containerElement, data) {
         removeNode(containerElement.querySelector("svg"));
         
-        var margin = {top: 20, right: 20, bottom: 30, left: 50},
+        var margin = {top: 20, right: 20, bottom: 20, left: 20},
             width = 400 - margin.left - margin.right,
             height = 400 - margin.top - margin.bottom;
 

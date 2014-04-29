@@ -49,3 +49,7 @@ table.steps th, table.steps td {
     padding: 1em;
     margin: 0 -1em;
 }
+
+.graph svg {
+    background-color: #fff;
+}
