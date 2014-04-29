@@ -42,3 +42,10 @@ table.steps th, table.steps td {
     cursor: pointer;
     text-decoration: underline;
 }
+
+
+.graph {
+    background-color: #f4f4f4;
+    padding: 1em;
+    margin: 0 -1em;
+}
