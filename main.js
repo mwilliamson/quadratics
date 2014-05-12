@@ -30,6 +30,7 @@
         var graph = graphs[name];
         
         var currentEquation;
+        var equationCallbacks = [];
         
         updateEquation(graph.initialEquation);
         
@@ -37,12 +38,18 @@
             value: function() {
                 return currentEquation;
             },
-            update: updateEquation
+            update: updateEquation,
+            onChange: function(callback) {
+                equationCallbacks.push(callback);
+            }
         });
         
         function updateEquation(equation) {
             currentEquation = equation;
             useEquation(interactiveElement, equation);
+            equationCallbacks.forEach(function(callback) {
+                callback(equation);
+            });
         }
         
         interactiveElement.querySelector(".action").addEventListener("click", function() {
@@ -120,6 +127,9 @@
             var equation = {coefficients: currentEquation.value().coefficients.slice(0)};
             equation.coefficients[power] = ui.value;
             currentEquation.update(equation);
+        });
+        currentEquation.onChange(function(equation) {
+            sliderElement.slider("value", equation.coefficients[power]);
         });
         return sliderElement;
     }
