@@ -77,7 +77,7 @@
         
         less.on("click", function() {
             var equation = {coefficients: currentEquation.value().coefficients.slice(0)};
-            var selectionIndex = coefficientSelection.indexOf(equation.coefficients[power]);
+            var selectionIndex = findClosest(coefficientSelection, equation.coefficients[power]);
             if (selectionIndex <= 0) {
                 equation.coefficients[power]--;
             } else {
@@ -96,7 +96,7 @@
         
         more.on("click", function() {
             var equation = {coefficients: currentEquation.value().coefficients.slice(0)};
-            var selectionIndex = coefficientSelection.indexOf(equation.coefficients[power]);
+            var selectionIndex = findClosest(coefficientSelection, equation.coefficients[power]);
             if (selectionIndex === -1 || selectionIndex >= coefficientSelection.length - 1) {
                 equation.coefficients[power]++;
             } else {
@@ -284,6 +284,21 @@
         if (node) {
             node.parentElement.removeChild(node);
         }
+    }
+    
+    function findClosest(array, value) {
+        for (var i = 0; i < array.length - 1; i++) {
+            if (value >= array[i] && value < array[i + 1]) {
+                var leftDistance = value - array[i];
+                var rightDistance = array[i + 1] - value;
+                if (leftDistance <= rightDistance) {
+                    return i;
+                } else {
+                    return i + 1;
+                }
+            }
+        }
+        return -1;
     }
 })();
 
