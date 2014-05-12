@@ -64,6 +64,11 @@
     function createCoefficientControl(coefficientIndex, power, currentEquation) {
         var li = $(document.createElement("li"));
         
+        var name = $(document.createElement("span"));
+        name.addClass("control-name");
+        name.text("$$ " + String.fromCharCode("a".charCodeAt(0) + coefficientIndex) + " $$");
+        li.append(name);
+        
         var less = $(document.createElement("span"));
         less.addClass("action");
         less.addClass("button-less");
@@ -81,10 +86,7 @@
             currentEquation.update(equation);
         });
         
-        var name = $(document.createElement("span"));
-        name.addClass("control-name");
-        name.text("$$ " + String.fromCharCode("a".charCodeAt(0) + coefficientIndex) + " $$");
-        li.append(name);
+        li.append(createCoefficientSlider(power, currentEquation));
         
         var more = $(document.createElement("span"));
         more.addClass("action");
@@ -104,6 +106,22 @@
         });
         
         return li.get(0);
+    }
+    
+    function createCoefficientSlider(power, currentEquation) {
+        var sliderElement = $('<div class="coefficient-slider">');
+        sliderElement.slider({
+            min: -10,
+            max: 10,
+            step: 0.1,
+            value: currentEquation.value().coefficients[power]
+        });
+        sliderElement.on("slide", function(event, ui) {
+            var equation = {coefficients: currentEquation.value().coefficients.slice(0)};
+            equation.coefficients[power] = ui.value;
+            currentEquation.update(equation);
+        });
+        return sliderElement;
     }
     
     function randomEquation(highestPower) {
